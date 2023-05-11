@@ -1,6 +1,6 @@
 from .config import Config
 from .get_tsxs import get_tsxs
-
+from uuid import uuid4
 
 def rollback(dir='.'):
     for file_name in get_tsxs(dir):
@@ -10,8 +10,11 @@ def rollback(dir='.'):
 
         for tag in Config.TAGS:
             idx = 0
-            while (idx := file_body.find('<' + tag + ' mark=', idx + 1)) != -1:
-                file_body = file_body[:idx + 1 + len(tag)] + file_body[idx + 1 + len(tag) + 6 + 36 + 2 + 1:]
+            while (idx := file_body.find('<' + tag + f' {Config.ATTR}=', idx + 1)) != -1:
+                mark_start = idx + 1 + len(tag)
+                mark_end = idx + 1 + len(tag) + len(Config.ATTR) \
+                           + len('="') + len(str(uuid4())) + len('" ') + 1
+                file_body = file_body[:mark_start] + file_body[mark_end:]
 
         with open(file_name, 'w') as file:
             file.write(file_body)
