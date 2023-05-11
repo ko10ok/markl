@@ -6,7 +6,7 @@ HERE = pathlib.Path(__file__).parent
 README = open("README.md").read()
 setup(
     name="markl",
-    version="0.0.2",
+    version="0.0.3",
     description=".tsx locator marker",
     long_description=README,
     long_description_content_type="text/markdown",
