@@ -14,7 +14,7 @@ def mark(dir='.'):
             idx = 0
             while (idx := file_body.find('<' + tag, idx + 1)) != -1:
                 uuid = uuid4()
-                if ' mark' != file_body[idx + 1 + len(tag):idx + 1 + len(tag) + 5]:
+                if ' mark' != file_body[idx + 1 + len(tag):idx + 1 + len(tag) + 5] and ' ' == file_body[idx + 1 + len(tag):idx + 1 + len(tag) + 1]:
                     file_body = file_body[:idx + 1 + len(tag)] + f' mark="{uuid}" ' + file_body[idx + 1 + len(tag):]
 
         # Write the file out again
