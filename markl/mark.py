@@ -17,7 +17,7 @@ def mark(dir='.'):
                 next_word = file_body[idx + 1 + len(tag):idx + 1 + len(tag) + 5]
                 next_symbol = file_body[idx + 1 + len(tag):idx + 1 + len(tag) + 1]
                 if next_word != f' {Config.ATTR}' and (next_symbol == ' ' or next_symbol == '\n'):
-                    file_body = file_body[:idx + 1 + len(tag)] + f' {Config.ATTR}="{uuid}" ' + file_body[idx + 1 + len(tag):]
+                    file_body = file_body[:idx + 1 + len(tag)] + f' {Config.ATTR}="{Config.ATTR_PREFIX}{uuid}"' + file_body[idx + 1 + len(tag):]
 
         # Write the file out again
         with open(file_name, 'w') as file:
